@@ -8,6 +8,7 @@
  All unit tests are in Project "ShowPetsTest" project, when viewing the solution on VS2017
 
 **Application Purpose**
+
 The coding challenge is to build an app that consumes JSON data from an API and provides an alphabetically sorted list of all the cats with the gender of their owner. For example:
 
 Male
@@ -21,6 +22,7 @@ Female
 *Jasper
 
 **Notes**
+
 To Test:
 Download this solution to your machine and open the solution file (ShowCats.sln) with VS2017.
 Once loaded on VS2017, press Ctrl-F5. This should launch a console app showing the results.
