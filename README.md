@@ -1,9 +1,37 @@
+# .Net core console app to show sorted list
+
 **Architectural Summary**
 
-Built with ASP.Net Core 2.2 console application and LINQ.
+ This is VS2017 solution that runs on .NET Core 2.2, C3 7.1 and LINQ
+ 
+ It consists of a Console App, a .NET Standard Library and Test Projects.
+ 
+ It uses MSTest and Moq for unit testing.
+ 
+ All unit tests are in Project "ShowPetsTest" project, when viewing the solution on VS2017
 
-Unit tested via MSTest and Moq.
+**Application Purpose**
 
-Use Visual Studio 2017 or latest to run the solution.
+The coding challenge is to build an app that consumes JSON data from an API and provides an alphabetically sorted list of all the cats with the gender of their owner. For example:
 
-It will make a HTTP call to API, after receiving json data it process the same in order to show the sorted list.
+Male
+
+*CatNameA
+
+*CatNameB
+
+Female
+
+*CatNameD
+
+*CatNameC
+
+**Notes**
+
+To Test:
+
+Download this solution to your machine and open the solution file (ShowCats.sln) with VS2017.
+
+Once loaded on VS2017, press Ctrl-F5. This should launch a console app showing the results.
+
+If the app is unable to connect to the People Web Service, it will show a friendly text message on the console.
