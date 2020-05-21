@@ -14,11 +14,13 @@ The coding challenge is to build an app that consumes JSON data from an API and 
 Male
 
 *Angel
+
 *Molly
 
 Female
 
 *Gizmo
+
 *Jasper
 
 **Notes**
