@@ -17,6 +17,7 @@ namespace ShowCats.Services
         private readonly HttpClient _httpClient;
         private readonly ILogger<DataService> logger;
         private readonly Appsettings appsettings;
+        public const string errorMsg = "Service not reachable:error code ";
         public DataService(ILogger<DataService> logger,
             Appsettings appsettings,
             HttpClient httpClient)
@@ -48,7 +49,7 @@ namespace ShowCats.Services
             }
             else
             {
-                result.Error = $"Service not reachable:error code {response.StatusCode}";
+                result.Error = $"{errorMsg}{response.StatusCode}";
             }
 
             return result;

@@ -6916,11 +6916,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rumpi.guha\\Source\\Repos\\show-list\\ShowPetsTest\\ShowPetsTest.csproj",
+      "projectUniqueName": "C:\\Users\\rumpi.guha\\source\\repos\\show-list\\ShowPetsTest\\ShowPetsTest.csproj",
       "projectName": "ShowPetsTest",
-      "projectPath": "C:\\Users\\rumpi.guha\\Source\\Repos\\show-list\\ShowPetsTest\\ShowPetsTest.csproj",
+      "projectPath": "C:\\Users\\rumpi.guha\\source\\repos\\show-list\\ShowPetsTest\\ShowPetsTest.csproj",
       "packagesPath": "C:\\Users\\rumpi.guha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rumpi.guha\\Source\\Repos\\show-list\\ShowPetsTest\\obj\\",
+      "outputPath": "C:\\Users\\rumpi.guha\\source\\repos\\show-list\\ShowPetsTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6939,8 +6939,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\rumpi.guha\\Source\\Repos\\show-list\\ShowCats\\ShowPets.csproj": {
-              "projectPath": "C:\\Users\\rumpi.guha\\Source\\Repos\\show-list\\ShowCats\\ShowPets.csproj"
+            "C:\\Users\\rumpi.guha\\source\\repos\\show-list\\ShowCats\\ShowPets.csproj": {
+              "projectPath": "C:\\Users\\rumpi.guha\\source\\repos\\show-list\\ShowCats\\ShowPets.csproj"
             }
           }
         }
