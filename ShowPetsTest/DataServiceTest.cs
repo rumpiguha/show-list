@@ -1,9 +1,14 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Moq.Protected;
 using ShowCats.Models;
 using ShowCats.Services;
+using ShowPets;
+using ShowPets.Services.Interfaces;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -14,6 +19,17 @@ namespace ShowPetsTest
     [TestClass]
     public class DataServiceTest
     {
+        private Mock<ILogger<DataService>> loggerMock;
+        private IDataService dataService;
+        private readonly Appsettings appSetting = new Appsettings { EndPoint = "test" };
+        private readonly Mock<IOptions<Appsettings>> mock = new Mock<IOptions<Appsettings>>();
+
+        public DataServiceTest()
+        {
+            loggerMock = new Mock<ILogger<DataService>>();
+            mock.Setup(ap => ap.Value).Returns(appSetting);
+        }
+
         [TestMethod]
         public async Task GetData_ShouldReturnResponseAsync()
         {
@@ -31,13 +47,16 @@ namespace ShowPetsTest
                     Content = new StringContent(testContent)
                 });
 
-            var configMock = new Mock<IConfigurationRoot>();
-            configMock.SetupGet(x => x[It.IsAny<string>()]).Returns("http://test/people.json");
+            var httpClient = new HttpClient(mockMessageHandler.Object)
+            {
+                BaseAddress = new Uri("http://test.com/"),
+            };
 
-            var dataService = new DataService(new HttpClient(mockMessageHandler.Object), configMock.Object);
+            dataService = new DataService(loggerMock.Object, mock.Object.Value, httpClient);
+
 
             // Act
-            var result = await dataService.GetData();
+            var result = await dataService.GetDataAsync();
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(Response));
@@ -62,13 +81,16 @@ namespace ShowPetsTest
                     Content = new StringContent(testContent)
                 });
 
-            var configMock = new Mock<IConfigurationRoot>();
-            configMock.SetupGet(x => x[It.IsAny<string>()]).Returns("http://test/people.json");
+            var httpClient = new HttpClient(mockMessageHandler.Object)
+            {
+                BaseAddress = new Uri("http://test.com/"),
+            };
 
-            var dataService = new DataService(new HttpClient(mockMessageHandler.Object), configMock.Object);
+            dataService = new DataService(loggerMock.Object, mock.Object.Value, httpClient);
+
 
             // Act
-            var result = await dataService.GetData();
+            var result = await dataService.GetDataAsync();
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(Response));

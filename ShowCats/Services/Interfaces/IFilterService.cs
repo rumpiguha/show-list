@@ -3,11 +3,12 @@ using ShowCats.Models.Enum;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ShowPets.Services.Interfaces
 {
     public interface IFilterService
     {
-        Dictionary<Gender, List<string>> FilterPets(List<Owner> owners, List<PetType> typeList);
+        Task<Dictionary<string, List<string>>> FilterPets();
     }
 }

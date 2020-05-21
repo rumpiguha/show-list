@@ -8,6 +8,6 @@ namespace ShowPets.Services.Interfaces
 {
     public interface IDataService
     {
-        Task<Response> GetData();
+        Task<Response> GetDataAsync();
     }
 }

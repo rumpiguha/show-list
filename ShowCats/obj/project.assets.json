@@ -2070,11 +2070,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rumpi.guha\\source\\repos\\ShowCats\\ShowCats\\ShowPets.csproj",
+      "projectUniqueName": "C:\\Users\\rumpi.guha\\Source\\Repos\\show-list\\ShowCats\\ShowPets.csproj",
       "projectName": "ShowPets",
-      "projectPath": "C:\\Users\\rumpi.guha\\source\\repos\\ShowCats\\ShowCats\\ShowPets.csproj",
+      "projectPath": "C:\\Users\\rumpi.guha\\Source\\Repos\\show-list\\ShowCats\\ShowPets.csproj",
       "packagesPath": "C:\\Users\\rumpi.guha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rumpi.guha\\source\\repos\\ShowCats\\ShowCats\\obj\\",
+      "outputPath": "C:\\Users\\rumpi.guha\\Source\\Repos\\show-list\\ShowCats\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -1,16 +1,28 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using ShowCats.Models;
 using ShowCats.Models.Enum;
 using ShowCats.Services;
+using ShowPets.Services.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShowPetsTest
 {
     [TestClass]
     public class FilterServiceTests
     {
+        private readonly Mock<IDataService> mockDataService;
+        private readonly IFilterService filterService;
+
+        public FilterServiceTests()
+        {
+            mockDataService = new Mock<IDataService>();
+            filterService = new FilterService(mockDataService.Object);
+        }
+
         [TestMethod]
-        public void FilterPets_ShouldReturnList_ValidInput()
+        public async Task FilterPets_ShouldReturnList_ValidInputAsync()
         {
             //Arrange
             var validOwnerList = new List<Owner> {
@@ -31,36 +43,47 @@ namespace ShowPetsTest
                 }
             };
 
-            var validTypeList = new List<PetType> { PetType.Cat };
+            var response = new Response
+            {
+                Error = string.Empty,
+                OwnerList = validOwnerList
+            };
+
+            mockDataService.Setup(m => m.GetDataAsync()).Returns(Task.FromResult(response));
 
             //Act
-            var filterService = new FilterService();
-            var result = filterService.FilterPets(validOwnerList, validTypeList);
+            var result = await filterService.FilterPets();
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(Dictionary<Gender, List<string>>));
+            Assert.IsInstanceOfType(result, typeof(Dictionary<string, List<string>>));
             Assert.AreEqual(result.Count, 2);
-            Assert.IsTrue(result.ContainsKey(validOwnerList[0].Gender));
+            Assert.IsTrue(result.ContainsKey(Gender.Female.ToString()));
+            Assert.IsTrue(result.ContainsKey(Gender.Male.ToString()));
         }
 
         [TestMethod]
-        public void FilterPets_ShouldReturnNull_EmptyOwnerInput()
+        public async Task FilterPets_ShouldReturnNull_EmptyOwnerInputAsync()
         {
             //Arrange
             var validOwnerList = new List<Owner>();
+            var response = new Response
+            {
+                Error = string.Empty,
+                OwnerList = validOwnerList
+            };
 
-            var validTypeList = new List<PetType> { PetType.Cat };
+            mockDataService.Setup(m => m.GetDataAsync()).Returns(Task.FromResult(response));
+
 
             //Act
-            var filterService = new FilterService();
-            var result = filterService.FilterPets(validOwnerList, validTypeList);
+            var result = await filterService.FilterPets();
 
             //Assert
-            Assert.IsNull(result);
+            Assert.IsTrue(result.ContainsKey("Error"));
         }
 
         [TestMethod]
-        public void FilterPets_ShouldReturnNull_EmptyPetInput()
+        public async Task FilterPets_ShouldReturnNull_EmptyPetInputAsync()
         {
             //Arrange
             var validOwnerList = new List<Owner> {
@@ -71,14 +94,19 @@ namespace ShowPetsTest
                 }
             };
 
-            var validTypeList = new List<PetType> { PetType.Cat };
+            var response = new Response
+            {
+                Error = string.Empty,
+                OwnerList = validOwnerList
+            };
+
+            mockDataService.Setup(m => m.GetDataAsync()).Returns(Task.FromResult(response));
 
             //Act
-            var filterService = new FilterService();
-            var result = filterService.FilterPets(validOwnerList, validTypeList);
+            var result = await filterService.FilterPets();
 
             //Assert
-            Assert.IsNull(result);
+            Assert.IsTrue(result.ContainsKey("Error"));
         }
     }
 }

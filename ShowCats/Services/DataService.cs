@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using ShowCats.Models;
+using ShowPets;
 using ShowPets.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -12,14 +15,22 @@ namespace ShowCats.Services
     public class DataService : IDataService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl;
-        public DataService(HttpClient httpClient, IConfigurationRoot config)
+        private readonly ILogger<DataService> logger;
+        private readonly Appsettings appsettings;
+        public DataService(ILogger<DataService> logger,
+            Appsettings appsettings,
+            HttpClient httpClient)
         {
-            var baseUrl = config["dataUrl"];
-            _httpClient = httpClient;
-            _baseUrl = baseUrl;
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.appsettings = appsettings ?? throw new ArgumentNullException(nameof(appsettings));
+            this._httpClient = httpClient;
         }
-        public async Task<Response> GetData()
+
+        /// <summary>
+        /// Gets the pet owner list from the people service
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Response> GetDataAsync()
         {
             var result = new Response
             {
@@ -27,7 +38,7 @@ namespace ShowCats.Services
                 Error = string.Empty
             };
 
-            HttpResponseMessage response = await _httpClient.GetAsync(_baseUrl);
+            HttpResponseMessage response = await _httpClient.GetAsync(this.appsettings.EndPoint);
 
             if (response.IsSuccessStatusCode)
             {

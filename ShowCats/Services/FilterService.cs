@@ -3,33 +3,52 @@ using System.Linq;
 using System.Collections.Generic;
 using ShowCats.Models.Enum;
 using ShowPets.Services.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace ShowCats.Services
 {
     public class FilterService : IFilterService
     {
+        public IDataService _dataService;
+        public FilterService(IDataService dataService)
+        {
+            this._dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
+        }
+
         /// <summary> 
         /// Filter Owner List with Pet type
         /// </summary>
-        /// <param name="owners">List Of Owner to filter</param>
-        /// <param name="typeList">List of pet type to be filtered with</param>
-        /// <returns>int value</returns>
-        public Dictionary<Gender, List<string>> FilterPets(List<Owner> owners, List<PetType> typeList)
+        /// <returns>Dictionary value</returns>
+        public async Task<Dictionary<string, List<string>>> FilterPets()
         {
-            if (owners.Any() && typeList.Any())
+            var response = await _dataService.GetDataAsync();
+
+            var dict = new Dictionary<string, List<string>>();
+
+            if (!string.IsNullOrEmpty(response.Error))
+                dict.Add("Error", new List<string> { response.Error });
+
+            else if (response.OwnerList.Count == 0)
+                dict.Add("Error", new List<string> { "No Data to Process" });
+            else
             {
-                //Filter owners who have at least one pet with input pet type  
-                var ownerWithPets = owners.FindAll(o => o.Pets != null && o.Pets.Any(p => p.Type == typeList.FirstOrDefault()));
+                //Filter owners who have at least one cat
+                var ownerWithPets = response.OwnerList.FindAll(o => o.Pets != null && o.Pets.Any(p => p.Type == PetType.Cat));
 
                 if (ownerWithPets.Any())
                 {
-                    //Filter out all other type of pets, except input pet type  
-                    ownerWithPets.ForEach(owner => { owner.Pets = owner.Pets.FindAll(p => p.Type == typeList.FirstOrDefault()).ToList(); });
+                    //Filter out all other type of pets, except cat 
+                    ownerWithPets.ForEach(owner =>
+                    {
+                        owner.Pets = owner.Pets.FindAll(p => p.Type == PetType.Cat).ToList();
+                    });
 
-                    return MapGenderToPet(ownerWithPets);
+                    dict = MapGenderToPet(ownerWithPets);
                 }
+                else { dict.Add("Error", new List<string> { "No Data to Process" }); }
             }
-            return null;
+            return dict;
         }
 
         /// <summary> 
@@ -37,21 +56,20 @@ namespace ShowCats.Services
         /// </summary>
         /// <param name="owners">List Of Owner with pets</param>
         /// <returns>Dictionary value</returns>
-        private static Dictionary<Gender, List<string>> MapGenderToPet(List<Owner> ownerWithPets)
+        private static Dictionary<string, List<string>> MapGenderToPet(List<Owner> ownerWithPets)
         {
-            var dict = new Dictionary<Gender, List<string>>
+            var dict = new Dictionary<string, List<string>>
             {
-                [Gender.Male] = ownerWithPets.FindAll(owner => Gender.Male == owner.Gender)
+                [Gender.Male.ToString()] = ownerWithPets.FindAll(owner => Gender.Male == owner.Gender)
                                                 .Select(owner => owner.Pets.Select(pet => pet.Name).ToList())
                                                 .SelectMany(petName => petName).ToList(),
 
-                [Gender.Female] = ownerWithPets.FindAll(owner => Gender.Female == owner.Gender)
+                [Gender.Female.ToString()] = ownerWithPets.FindAll(owner => Gender.Female == owner.Gender)
                                                 .Select(owner => owner.Pets.Select(pet => pet.Name).ToList())
                                                 .SelectMany(petName => petName).ToList()
             };
 
             return dict;
-
         }
     }
 }

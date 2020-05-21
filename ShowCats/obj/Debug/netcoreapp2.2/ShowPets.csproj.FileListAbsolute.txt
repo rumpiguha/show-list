@@ -10,3 +10,15 @@ C:\Users\rumpi.guha\source\repos\ShowCats\ShowCats\bin\Debug\netcoreapp2.2\ShowP
 C:\Users\rumpi.guha\source\repos\ShowCats\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.dll
 C:\Users\rumpi.guha\source\repos\ShowCats\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.pdb
 C:\Users\rumpi.guha\source\repos\ShowCats\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.csprojAssemblyReference.cache
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\bin\Debug\netcoreapp2.2\ShowPets.deps.json
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\bin\Debug\netcoreapp2.2\ShowPets.runtimeconfig.json
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\bin\Debug\netcoreapp2.2\ShowPets.runtimeconfig.dev.json
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\bin\Debug\netcoreapp2.2\ShowPets.dll
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\bin\Debug\netcoreapp2.2\ShowPets.pdb
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.csprojAssemblyReference.cache
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.csproj.CoreCompileInputs.cache
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.AssemblyInfoInputs.cache
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.AssemblyInfo.cs
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.dll
+C:\Users\rumpi.guha\Source\Repos\show-list\ShowCats\obj\Debug\netcoreapp2.2\ShowPets.pdb
