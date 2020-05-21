@@ -16,15 +16,15 @@ The coding challenge is to build an app that consumes JSON data from an API and 
 
 Male
 
-*Angel
+*CatNameA
 
-*Molly
+*CatNameB
 
 Female
 
-*Gizmo
+*CatNameD
 
-*Jasper
+*CatNameC
 
 **Notes**
 
